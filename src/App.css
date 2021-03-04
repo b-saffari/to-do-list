@@ -1,9 +1,13 @@
 .completedTask {
-  color: yellow;
+  color: gray;
+  text-decoration-line: line-through;
 }
 .unCompletedTask {
   color: green;
 }
+.toDoList {
+}
+
 .App {
   text-align: center;
 }

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
-    <div className="container">
+    <div className="container overflow-hidden">
       <TodoList/>
     </div>
   );

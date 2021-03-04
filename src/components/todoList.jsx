@@ -10,7 +10,12 @@ const TodoList = () => {
     }
 
     const addBottomHandler = (todo) => {
-             setTodoList([...todoList ,todo])
+        const tds = [...todoList ,todo]
+        tds.sort(function(x, y) {
+            return (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1;
+        })
+
+        setTodoList(tds)
     }
     const deleteHandler = (title) => {
         const todos = [...todoList];
@@ -23,11 +28,26 @@ const TodoList = () => {
 
         setTodoList(todos)
     }
+    const undoHandler = (title) => {
+        const todos = [...todoList];
+        const index = todos.findIndex(todo => todo.title === title)
+        todos[index].isCompleted = false
+        todos.sort(function(x, y) {
+            return (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1;
+        })
+
+        setTodoList(todos)
+    }
+   
 
     return (
         <>
             <AddTodo addTopHandler={addTopHandler} addBottomHandler={addBottomHandler} />
-            {todoList.map(t => <Todo key={t.title} todo={t} deleteHandler={deleteHandler}/>)}
+            <div className="border border-info m-2 p-4">
+                <h2>To DO List</h2>
+                {todoList.map(t => <Todo key={t.title} todo={t} deleteHandler={deleteHandler} undoHandler={undoHandler}/>)}
+            </div>
+            
         </>
     )
 }
